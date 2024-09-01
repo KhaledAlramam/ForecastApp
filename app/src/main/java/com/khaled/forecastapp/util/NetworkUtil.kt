@@ -1,7 +1,6 @@
 package com.khaled.forecastapp.util
 
 import android.util.Log
-import com.squareup.moshi.Moshi
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.HttpException

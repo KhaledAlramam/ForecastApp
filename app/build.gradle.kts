@@ -72,11 +72,12 @@ dependencies {
     implementation(libs.androidx.material3)
     //Retrofit and Moshi
     implementation(libs.retrofit)
-    implementation(libs.moshi)
-
+    implementation(libs.gson)
+    implementation(libs.okhttp)
     //Hilt
     ksp(libs.hilt.android.compiler)
     implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

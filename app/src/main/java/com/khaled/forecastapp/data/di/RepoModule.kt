@@ -12,8 +12,5 @@ import dagger.hilt.components.SingletonComponent
 abstract class RepoModule {
 
     @Binds
-    abstract fun bindHomeRepo(
-        homeRepoImpl: HomeRepoImpl
-    ): HomeRepo
-
+    abstract fun bindHomeRepo(homeRepoImpl: HomeRepoImpl): HomeRepo
 }
