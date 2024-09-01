@@ -1,6 +1,10 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -18,6 +22,12 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        //load the values from .properties file
+        val keystoreFile = project.rootProject.file("gradle.properties")
+        val properties = Properties()
+        properties.load(keystoreFile.inputStream())
+        val apiKey = properties.getProperty("API_KEY") ?: ""
+        buildConfigField(type = "String", name = "API_KEY", value = apiKey)
     }
 
     buildTypes {
@@ -38,9 +48,10 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
     packaging {
         resources {
@@ -59,8 +70,14 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    //Retrofit and Moshi
     implementation(libs.retrofit)
     implementation(libs.moshi)
+
+    //Hilt
+    ksp(libs.hilt.android.compiler)
+    implementation(libs.hilt.android)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
